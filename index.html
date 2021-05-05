@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <title>Grade Book</title>
+    <!-- Bootstrap styles first -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Our styles -->
+    <link href="grades.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+
+<h1>Grade Book</h1>
+
+<Div>
+    <form>
+        <label for="studentFirstName">Student First Name:</label>
+        <input type="text" id="studentFirstName" required>
+        <p id="studentFirstNameCorrection" class="correction"></p>
+        <br>
+
+        <label for="studentLastName">Student Last Name:</label>
+        <input type="text" id="studentLastName" required>
+        <p id="studentLastNameCorrection" class="correction"></p>
+        <br>
+
+        <label for="pointsEarned">What score was earned by this student?</label>
+        <input type="number" id="pointsEarned" min="0" max="500" required>
+        <p id="pointsEarnedCorrection" class="correction"></p>
+        <br>
+
+        <label for="pointsPossible">What was the total points possible?</label>
+        <input type="number" id="pointsPossible" min="0" max="500" required>
+        <p id="pointsPossibleCorrection" class="correction"></p>
+        <br>
+
+        <button id="submitButton" type="submit">Store Grade</button>
+        <br>
+    </form>
+    <br>
+    <p id="dataDisplay"></p>
+    <br>
+</Div>
+
+
+<!-- jQuery first -- BEWARE OF THE SLIM VERSION FROM BOOTSTRAP -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+<!-- Popper and Bootstrap second -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Our code last -->
+<script src="grades.js"></script>
+
+
+</body>
+</html>
