@@ -85,7 +85,7 @@ function storeGrade(event) {
 function displayGrades(arrayName) {
     $("#dataDisplay").empty()
     for(let object of arrayName){
-        let score = (object.earnedPoints / object.possiblePoints) *100;
+        let score = ((object.earnedPoints / object.possiblePoints) *100).toFixed(2);
         let letterGrade;
         if (score>=90){
             letterGrade = "A";
