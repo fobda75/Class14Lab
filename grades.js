@@ -2,9 +2,11 @@ let valid1 =false;
 let valid2 = false;
 let valid3 =false;
 let valid4 = false;
-let grade = {};
+let gradeBook=[];
 $(document).ready(function () {
     $("#submitButton").click(storeGrade);
+    $("#sortByName").on("click",nameSort);
+    $("#sortByPercent").on("click",percentSort)
 })
 function storeGrade(event) {
     event.preventDefault();
@@ -64,7 +66,7 @@ function storeGrade(event) {
         valid4=true;
     }
     if(valid1 && valid2 && valid3 && valid4){
-        grade = {
+        let grade = {
             firstName: $("#studentFirstName").val(),
             lastName: $("#studentLastName").val(),
             earnedPoints: $("#pointsEarned").val(),
@@ -74,31 +76,76 @@ function storeGrade(event) {
         $("#studentLastName").val("");
         $("#pointsEarned").val("");
         $("#pointsPossible").val("");
-        displayGrade();
+        gradeBook.push(grade);
+        displayGrades(gradeBook);
     }
 
 }
 
-function displayGrade() {
-    let fName = grade.firstName;
-    let lName = grade.lastName;
-    let score = (grade.earnedPoints / grade.possiblePoints) *100;
-    let letterGrade;
-    if (score>=90){
-        letterGrade = "A";
+function displayGrades(arrayName) {
+    $("#dataDisplay").empty()
+    for(let object of arrayName){
+        let score = (object.earnedPoints / object.possiblePoints) *100;
+        let letterGrade;
+        if (score>=90){
+            letterGrade = "A";
+        }
+        else if (score>=80){
+            letterGrade = "B";
+        }
+        else if (score>=70){
+            letterGrade ="C";
+        }
+        else if (score >= 60){
+            letterGrade = "D";
+        }
+        else{
+            letterGrade ="F";
+        }
+        let message = `${object.lastName}, ${object.firstName}: 
+            ${object.earnedPoints}/${object.possiblePoints}: ${score}% 
+            ${letterGrade}<br>`;
+        $("#dataDisplay").append(message);
     }
-    else if (score>=80){
-        letterGrade = "B";
+
+}
+
+function nameSort(){
+    gradeBook.sort(sortByName);
+    displayGrades(gradeBook);
+}
+
+function percentSort(){
+    gradeBook.sort(sortByPercent);
+    displayGrades(gradeBook);
+}
+
+function sortByName(a,b){
+    let nameA=`${a.lastName.toUpperCase()}, ${a.firstName.toUpperCase()}`;
+    let nameB=`${b.lastName.toUpperCase()}, ${b.firstName.toUpperCase()}`;
+    if (nameA < nameB){
+        return -1;
     }
-    else if (score>=70){
-        letterGrade ="C";
-    }
-    else if (score >= 60){
-        letterGrade = "D";
+    else if (nameA > nameB){
+        return 1;
     }
     else{
-        letterGrade ="F";
+        return 0;
     }
-    let message = `${lName}, ${fName}: ${score}% ${letterGrade}`;
-    $("#dataDisplay").text(message);
+
+}
+
+function sortByPercent(a,b){
+    let percentA = a.earnedPoints/a.possiblePoints;
+    let percentB = b.earnedPoints/b.possiblePoints;
+    if (percentA < percentB){
+        return 1;
+    }
+    else if (percentA > percentB){
+        return -1;
+    }
+    else{
+        return 0;
+    }
+
 }
